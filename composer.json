@@ -1,21 +1,21 @@
 {
-    "name": "drupal/geoserver",
-    "description": "Allow interaction between drupal and geoserver",
-    "type": "drupal-module",
-    "require": {
-        "lowem/geoserver-php": "^1.0"
-    },
-    "license": "GPL-2.0",
-    "autoload": {
-        "psr-4": {
-            "Drupal\\Geoserver\\": ""
-        }
-    },
-    "authors": [
-        {
-            "name": "Lowe-Man",
-            "email": "loweman64@outlook.com"
-        }
-    ],
-    "minimum-stability": "stable"
+  "name": "drupal/geoserver",
+  "description": "Allow interaction between drupal and geoserver",
+  "type": "drupal-module",
+  "require": {
+    "lowem/geoserver-php": "^1.0"
+  },
+  "license": "GPL-2.0",
+  "autoload": {
+    "psr-4": {
+      "Drupal\\Geoserver\\": ""
+    }
+  },
+  "authors": [
+    {
+      "name": "Lowe-Man",
+      "email": "loweman64@outlook.com"
+    }
+  ],
+  "minimum-stability": "stable"
 }
