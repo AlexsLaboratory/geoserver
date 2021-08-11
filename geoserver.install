@@ -1,26 +1,32 @@
 <?php
 
 function geoserver_schema() {
-	$schema = [];
-  $schema['geoserver'] = [
-  	"description" => "Keep tack of the settings",
-  	"fields" => [
-  		"base_url" => [
-  			"description" => "The base url for the geoserver install",
-  			"type" => "varchar",
-  			"length" => 256
-  		],
-  		"username" => [
-  			"description" => "The username for geoserver",
-  			"type" => "varchar",
-  			"length" => 256
-  		],
-  		"password" => [
-  			"description" => "The password for geoserver",
-  			"type" => "varchar",
-  			"length" => 256
-  		],
-  	]
+  $schema = [];
+  $schema["geoserver"] = [
+    "description" => "Geoserver Module",
+    "fields" => [
+      "id" => [
+        "description" => "Primary Key",
+        "type" => "serial",
+        "not null" => TRUE,
+      ],
+      "base_url" => [
+        "description" => "Base url of the geoserver",
+        "type" => "varchar",
+        "length" => 512,
+      ],
+      "username" => [
+        "description" => "Username for geoserver",
+        "type" => "varchar",
+        "length" => 256,
+      ],
+      "password" => [
+        "description" => "Password for geoserver",
+        "type" => "varchar",
+        "length" => 256,
+      ],
+    ],
+    "primary key" => ["id"],
   ];
   return $schema;
 }
