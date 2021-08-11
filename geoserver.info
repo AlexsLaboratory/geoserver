@@ -1,0 +1,3 @@
+name = geoserver
+description = UI for Geoserver API
+core = 7.x 

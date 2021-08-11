@@ -1,0 +1,26 @@
+<?php
+
+function geoserver_schema() {
+	$schema = [];
+  $schema['geoserver'] = [
+  	"description" => "Keep tack of the settings",
+  	"fields" => [
+  		"base_url" => [
+  			"description" => "The base url for the geoserver install",
+  			"type" => "varchar",
+  			"length" => 256
+  		],
+  		"username" => [
+  			"description" => "The username for geoserver",
+  			"type" => "varchar",
+  			"length" => 256
+  		],
+  		"password" => [
+  			"description" => "The password for geoserver",
+  			"type" => "varchar",
+  			"length" => 256
+  		],
+  	]
+  ];
+  return $schema;
+}
