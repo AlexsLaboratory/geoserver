@@ -24,7 +24,7 @@ function geoserver_admin_list() {
   $result = db_query("SELECT * FROM {geoserver}");
   foreach ($result as $record) {
     $table["rows"][] = [
-      "username" => $record->username,
+      "name" => $record->name,
       l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id)
     ];
 

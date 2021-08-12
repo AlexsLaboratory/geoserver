@@ -30,3 +30,13 @@ function geoserver_schema() {
   ];
   return $schema;
 }
+
+function geoserver_update_7001() {
+  $schema = [
+    "type" => "varchar",
+    "description" => "Name of the credential group",
+    "length" => "200",
+    "not null" => TRUE
+  ];
+  db_add_field("geoserver", "name", $schema);
+}
