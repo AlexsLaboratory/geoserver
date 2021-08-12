@@ -16,3 +16,17 @@ function geoserver_help($path, $arg) {
       break;
   }
 }
+
+function geoserver_menu() {
+  $items = [];
+
+  $items["admin/geoserver/settings"] = [
+    "title" => "Geoserver Admin",
+    "description" => "Provides a form so users can manage the settings",
+    "page callback" => "geoserver_admin_list",
+    "page arguments" => [],
+    "access arguments" => ["use geoserver"],
+    "file" => "includes/geoserver.admin.inc",
+  ];
+  return $items;
+}
