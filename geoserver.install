@@ -20,6 +20,11 @@ function geoserver_schema() {
         "type" => "varchar",
         "length" => 256,
       ],
+      "name" => [
+        "description" => "Name for geoserver",
+        "type" => "varchar",
+        "length" => 256,
+      ],
       "password" => [
         "description" => "Password for geoserver",
         "type" => "varchar",

@@ -28,5 +28,45 @@ function geoserver_menu() {
     "access arguments" => ["use geoserver"],
     "file" => "includes/geoserver.admin.inc",
   ];
+
+  // Add geoserver credentials
+  $items["admin/geoserver/settings/credentials/add"] = [
+    "title" => "Add Geoserver Credentials",
+    "description" => "Allow users to add geoserver credentials",
+    "page callback" => "drupal_get_form",
+    "page arguments" => [
+      "geoserver_admin_settings_credentials_form",
+      "add"
+    ],
+    "access arguments" => ["administer geoserver"],
+    "file" => "includes/geoserver.admin.inc",
+  ];
+
+  // Edit geoserver credentials.
+  $items["admin/geoserver/settings/credentials/edit"] = [
+    "title" => "Edit Credentials",
+    "description" => "Edit an existing credentials.",
+    "page callback" => "drupal_get_form",
+    "page arguments" => [
+      "geoserver_admin_settings_credentials_form",
+      "edit"
+    ],
+    "access arguments" => ["administer geoserver"],
+    "file" => "includes/geoserver.admin.inc",
+  ];
+
+  // Delete geoserver credentials.
+  $items["admin/geoserver/settings/credentials/delete"] = [
+    "title" => "Delete Credentials",
+    "description" => "Delete an existing credentials.",
+    "page callback" => "drupal_get_form",
+    "page arguments" => [
+      "geoserver_admin_settings_credentials_form",
+      "delete"
+    ],
+    "access arguments" => ["administer geoserver"],
+    "file" => "includes/geoserver.admin.inc",
+  ];
+
   return $items;
 }
