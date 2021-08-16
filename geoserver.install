@@ -33,6 +33,19 @@ function geoserver_schema() {
     ],
     "primary key" => ["id"],
   ];
+
+  $schema["geoserver_credential_default"] = [
+    "description" => "Geoserver Module",
+    "fields" => [
+      "id" => [
+        "description" => "Primary Key",
+        "type" => "int",
+        "not null" => TRUE,
+      ]
+    ],
+    "primary key" => ["id"],
+  ];
+
   return $schema;
 }
 
@@ -44,4 +57,17 @@ function geoserver_update_7001() {
     "not null" => TRUE
   ];
   db_add_field("geoserver", "name", $schema);
+}
+
+function geoserver_update_7002() {
+  $schema = [
+    "description" => "Primary Key",
+    "fields" => [
+      "id" => [
+        "type" => "int",
+        "not null" => TRUE
+      ]
+    ]
+  ];
+  db_create_table("geoserver_credential_default", $schema);
 }
