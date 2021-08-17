@@ -23,7 +23,8 @@ function geoserver_admin_list() {
   $results = db_query("SELECT * FROM {geoserver}");
   foreach ($results as $record) {
     $default = db_query("SELECT id FROM {geoserver_credential_default} WHERE id=:id", [":id" => $record->id]);
-    $links = l("edit", "admin/geoserver/settings/group/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/group/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/default/" . $record->id);
+    $links = l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/credentials/default/" . $record->id);
+
     if ($default->rowCount() === 1) {
       $links .= " " . "<span class=\"icon circle circle--default-active\"></span>";
     }
