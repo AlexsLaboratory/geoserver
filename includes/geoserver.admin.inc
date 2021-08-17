@@ -10,7 +10,7 @@ function geoserver_admin_list() {
   $table = [
     "header" => [
       [
-        "data" => "Geoserver Credentials Name",
+        "data" => "Name",
         "width" => "50%"
       ],
       [
@@ -20,24 +20,23 @@ function geoserver_admin_list() {
     ],
     "rows" => [],
   ];
-
-  $result = db_query("SELECT * FROM {geoserver}");
-  foreach ($result as $record) {
+  $results = db_query("SELECT * FROM {geoserver}");
+  foreach ($results as $r) {
     $table["rows"][] = [
-      "name" => $record->name,
-      l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/credentials/default/" . $record->id)
+      "name" => $r->name,
+      l("edit", "admin/geoserver/settings/group/edit/" . $r->id) . " | " . l("delete", "admin/geoserver/settings/group/delete/" . $r->id) . " | " . l("set default", "admin/geoserver/settings/default/" . $r->id)
     ];
-
-    if (empty($table["rows"])) {
-      $table["rows"][] = [
-        [
-          "data" => "None.",
-          "colspan" => 2
-        ]
-      ];
-    }
-    $output .= theme("table", $table);
   }
+  // If there are no groups yet, display only the headers of the table.
+  if (empty($table["rows"])) {
+    $table["rows"][] = [
+      [
+        "data" => "None.",
+        "colspan" => 2
+      ]
+    ];
+  }
+  $output .= theme("table", $table);
   return $output;
 }
 
