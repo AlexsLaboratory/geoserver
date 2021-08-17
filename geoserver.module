@@ -67,14 +67,15 @@ function geoserver_menu() {
     "access arguments" => ["administer geoserver"],
     "file" => "includes/geoserver.admin.inc",
   ];
-  // Set geoserver credentials to default
-  $items["admin/geoserver/settings/credentials/default"] = [
-    "title" => "Set Credentials Default",
-    "description" => "Sets the credentials that you want to use as default",
+
+  // Set geoserver credentials to use
+  $items["admin/geoserver/settings/credentials/use"] = [
+    "title" => "Set Credentials use",
+    "description" => "Sets the credentials that you want to use",
     "page callback" => "drupal_get_form",
     "page arguments" => [
       "geoserver_admin_settings_credentials_form",
-      "default"
+      "use"
     ],
     "access arguments" => ["administer geoserver"],
     "file" => "includes/geoserver.admin.inc",

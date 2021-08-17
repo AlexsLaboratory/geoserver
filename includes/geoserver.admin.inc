@@ -22,11 +22,11 @@ function geoserver_admin_list() {
   ];
   $results = db_query("SELECT * FROM {geoserver}");
   foreach ($results as $record) {
-    $default = db_query("SELECT id FROM {geoserver_credential_default} WHERE id=:id", [":id" => $record->id]);
-    $links = l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/credentials/default/" . $record->id);
+    $use = db_query("SELECT id FROM {geoserver_credential_use} WHERE id=:id", [":id" => $record->id]);
+    $links = l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id) . " | " . l("use", "admin/geoserver/settings/credentials/use/" . $record->id);
 
-    if ($default->rowCount() === 1) {
-      $links .= " " . "<span class=\"icon circle circle--default-active\"></span>";
+    if ($use->rowCount() === 1) {
+      $links .= " " . "<span class=\"icon circle circle--use-active\"></span>";
     }
 
     $table["rows"][] = [
@@ -93,7 +93,7 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
       "#name" => "delete",
       "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
     ];
-  } elseif ($form_state["build_info"]["args"][0] == "default") {
+  } elseif ($form_state["build_info"]["args"][0] == "use") {
     $table = [
       "header" => NULL,
       "rows" => [
@@ -108,7 +108,7 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
     ];
     $form["info"] = [
       "#type" => "markup",
-      "#markup" => "<p>Would you like to set the following credential as default?</p>" . theme("table", $table)
+      "#markup" => "<p>Would you like to use the following credentials?</p>" . theme("table", $table)
     ];
 
     $form["name"] = [
@@ -116,10 +116,10 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
       "#value" => $obj->name,
     ];
 
-    $form["default"] = [
+    $form["use"] = [
       "#type" => "submit",
-      "#value" => "Set Default",
-      "#name" => "default",
+      "#value" => "Use",
+      "#name" => "use",
       "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
     ];
   } else {
@@ -180,14 +180,14 @@ function geoserver_admin_settings_credentials_form_submit($form, &$form_state) {
   if ($form_state["triggering_element"]["#name"] == "delete") {
     db_query("DELETE FROM {geoserver} WHERE id=:id", [":id" => $form_state["values"]["id"]]);
     drupal_set_message("Successfully deleted <em>" . $form_state["values"]["name"] . "</em>.");
-  } elseif ($form_state["triggering_element"]["#name"] == "default") {
-    $result = db_query("SELECT id FROM {geoserver_credential_default}")->fetchObject();
-    db_delete('geoserver_credential_default')->condition('id', $result->id)->execute();
+  } elseif ($form_state["triggering_element"]["#name"] == "use") {
+    $result = db_query("SELECT id FROM {geoserver_credential_use}")->fetchObject();
+    db_delete('geoserver_credential_use')->condition('id', $result->id)->execute();
     $record = [
       "id" => $form_state["values"]["id"]
     ];
-    drupal_write_record("geoserver_credential_default", $record);
-    drupal_set_message("Successfully set <em>" . $form_state["values"]["name"] . "</em> to default.");
+    drupal_write_record("geoserver_credential_use", $record);
+    drupal_set_message("Successfully set <em>" . $form_state["values"]["name"] . "</em> to use.");
   } else {
     $record = [
       "name" => $form_state["values"]["name"],

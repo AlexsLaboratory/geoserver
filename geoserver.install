@@ -34,7 +34,7 @@ function geoserver_schema() {
     "primary key" => ["id"],
   ];
 
-  $schema["geoserver_credential_default"] = [
+  $schema["geoserver_credential_use"] = [
     "description" => "Geoserver Module",
     "fields" => [
       "id" => [
@@ -69,5 +69,5 @@ function geoserver_update_7002() {
       ]
     ]
   ];
-  db_create_table("geoserver_credential_default", $schema);
+  db_create_table("geoserver_credential_use", $schema);
 }

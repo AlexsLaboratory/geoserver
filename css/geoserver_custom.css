@@ -12,7 +12,7 @@
   content: "\f111";
 }
 
-.circle--default-active {
+.circle--use-active {
   color: green;
   margin-left: 1rem;
 }
