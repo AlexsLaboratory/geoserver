@@ -25,7 +25,7 @@ function geoserver_admin_list() {
   foreach ($result as $record) {
     $table["rows"][] = [
       "name" => $record->name,
-      l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id)
+      l("edit", "admin/geoserver/settings/credentials/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/credentials/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/credentials/default/" . $record->id)
     ];
 
     if (empty($table["rows"])) {
@@ -86,6 +86,34 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
       "#value" => "Delete",
       "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
     ];
+  } elseif ($form_state["build_info"]["args"][0] == "default") {
+    $table = [
+      "header" => NULL,
+      "rows" => [
+        [
+          [
+            "data" => "Name",
+            "header" => TRUE
+          ],
+          $obj->name
+        ]
+      ],
+    ];
+    $form["info"] = [
+      "#type" => "markup",
+      "#markup" => "<p>Would you like to set the following credential as default?</p>" . theme("table", $table)
+    ];
+
+    $form["name"] = [
+      "#type" => "hidden",
+      "#value" => $obj->name,
+    ];
+
+    $form["default"] = [
+      "#type" => "submit",
+      "#value" => "Set Default",
+      "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
+    ];
   } else {
     $form["name"] = [
       "#type" => "textfield",
@@ -136,6 +164,13 @@ function geoserver_admin_settings_credentials_form_submit($form, &$form_state) {
   if ($form_state["values"]["op"] == "Delete") {
     db_query("DELETE FROM {geoserver} WHERE id=:id", [":id" => $form_state["values"]["id"]]);
     drupal_set_message("Successfully deleted <em>" . $form_state["values"]["name"] . "</em>.");
+  } elseif ($form_state["values"]["op"] == "Set Default") {
+    $form_state->
+    $record = [
+      "id" => $form_state["values"]["id"]
+    ];
+    drupal_write_record("geoserver_credential_default", $record);
+    drupal_set_message("Successfully set <em>" . $form_state["values"]["name"] . "</em> to default.");
   } else {
     $record = [
       "name" => $form_state["values"]["name"],
