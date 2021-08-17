@@ -173,10 +173,12 @@ function geoserver_admin_settings_credentials_form_submit($form, &$form_state) {
   $form_state["rebuild"] = FALSE;
   $form_state["redirect"] = "admin/geoserver/settings";
 
-  if ($form_state["triggering_element"]["#name"]== "delete") {
+  if ($form_state["triggering_element"]["#name"] == "delete") {
     db_query("DELETE FROM {geoserver} WHERE id=:id", [":id" => $form_state["values"]["id"]]);
     drupal_set_message("Successfully deleted <em>" . $form_state["values"]["name"] . "</em>.");
   } elseif ($form_state["triggering_element"]["#name"] == "default") {
+    $result = db_query("SELECT id FROM {geoserver_credential_default}")->fetchObject();
+    db_delete('geoserver_credential_default')->condition('id', $result->id)->execute();
     $record = [
       "id" => $form_state["values"]["id"]
     ];
