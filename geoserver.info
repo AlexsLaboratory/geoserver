@@ -2,4 +2,6 @@ name = geoserver
 description = UI for Geoserver API
 core = 7.x
 version = 7.x-0.1
+stylesheets[all][] = css/geoserver_fontawesome.css
+stylesheets[all][] = css/geoserver_custom.css
 configure = admin/geoserver/settings

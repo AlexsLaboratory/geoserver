@@ -21,13 +21,19 @@ function geoserver_admin_list() {
     "rows" => [],
   ];
   $results = db_query("SELECT * FROM {geoserver}");
-  foreach ($results as $r) {
+  foreach ($results as $record) {
+    $default = db_query("SELECT id FROM {geoserver_credential_default} WHERE id=:id", [":id" => $record->id]);
+    $links = l("edit", "admin/geoserver/settings/group/edit/" . $record->id) . " | " . l("delete", "admin/geoserver/settings/group/delete/" . $record->id) . " | " . l("set default", "admin/geoserver/settings/default/" . $record->id);
+    if ($default->rowCount() === 1) {
+      $links .= " " . "<span class=\"icon circle circle--default-active\"></span>";
+    }
+
     $table["rows"][] = [
-      "name" => $r->name,
-      l("edit", "admin/geoserver/settings/group/edit/" . $r->id) . " | " . l("delete", "admin/geoserver/settings/group/delete/" . $r->id) . " | " . l("set default", "admin/geoserver/settings/default/" . $r->id)
+      "name" => $record->name,
+      $links
     ];
   }
-  // If there are no groups yet, display only the headers of the table.
+
   if (empty($table["rows"])) {
     $table["rows"][] = [
       [
@@ -158,8 +164,6 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
         "#value" => "Add"
       ];
     }
-
-
   }
   return $form;
 }
