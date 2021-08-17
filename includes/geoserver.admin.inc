@@ -84,6 +84,7 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
     $form["delete"] = [
       "#type" => "submit",
       "#value" => "Delete",
+      "#name" => "delete",
       "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
     ];
   } elseif ($form_state["build_info"]["args"][0] == "default") {
@@ -112,6 +113,7 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
     $form["default"] = [
       "#type" => "submit",
       "#value" => "Set Default",
+      "#name" => "default",
       "#suffix" => "<span> " . l("or Cancel", "/admin/geoserver/settings") . "</span>",
     ];
   } else {
@@ -144,10 +146,20 @@ function geoserver_admin_settings_credentials_form($form, &$form_state) {
     ];
 
     $op = ucwords($form_state["build_info"]["args"][0]);
-    $form["submit"] = [
-      "#type" => "submit",
-      "#value" => ($op == "Edit") ? "Save Changes" : $op,
-    ];
+    if ($op === "Edit") {
+      $form["submit"] = [
+        "#type" => "submit",
+        "#name" => "edit",
+        "#value" => "Save Changes"
+      ];
+    } else {
+      $form["submit"] = [
+        "#type" => "submit",
+        "#name" => "add",
+        "#value" => "Add"
+      ];
+    }
+
 
   }
   return $form;
@@ -161,11 +173,10 @@ function geoserver_admin_settings_credentials_form_submit($form, &$form_state) {
   $form_state["rebuild"] = FALSE;
   $form_state["redirect"] = "admin/geoserver/settings";
 
-  if ($form_state["values"]["op"] == "Delete") {
+  if ($form_state["triggering_element"]["#name"]== "delete") {
     db_query("DELETE FROM {geoserver} WHERE id=:id", [":id" => $form_state["values"]["id"]]);
     drupal_set_message("Successfully deleted <em>" . $form_state["values"]["name"] . "</em>.");
-  } elseif ($form_state["values"]["op"] == "Set Default") {
-    $form_state->
+  } elseif ($form_state["triggering_element"]["#name"] == "default") {
     $record = [
       "id" => $form_state["values"]["id"]
     ];
@@ -179,7 +190,7 @@ function geoserver_admin_settings_credentials_form_submit($form, &$form_state) {
       "base_url" => $form_state["values"]["baseurl"],
     ];
 
-    if ($form_state["values"]["op"] == "Add") {
+    if ($form_state["triggering_element"]["#name"] == "add") {
       drupal_write_record("geoserver", $record);
     } else {
       $record["id"] = $form_state["values"]["id"];
