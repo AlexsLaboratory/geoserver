@@ -1,5 +1,8 @@
 <?php
 
+$modulePath = drupal_get_path("module", "geoserver");
+require_once  "$modulePath/includes/functions.php";
+
 function geoserver_user_list() {
   $output = "<ul>";
   $output .= "<li>" . l("Create Workspace", "geoserver/call/create-workspace") . "</li>";
@@ -23,5 +26,5 @@ function geoserver_create_workspace_form($form, &$form_state) {
 }
 
 function geoserver_create_workspace_form_submit($form, &$form_state) {
-
+  return get_use_cred();
 }
