@@ -81,5 +81,16 @@ function geoserver_menu() {
     "file" => "includes/geoserver.admin.inc",
   ];
 
+  /* User Section */
+
+  $items["geoserver/calls"] = [
+    "title" => "Geoserver API Calls",
+    "description" => "Provides a list of geoserver api calls",
+    "page callback" => "geoserver_user_list",
+    "page arguments" => [],
+    "access arguments" => ["use geoserver"],
+    "file" => "includes/geoserver.user.inc",
+  ];
+
   return $items;
 }
