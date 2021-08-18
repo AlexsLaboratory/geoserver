@@ -92,5 +92,16 @@ function geoserver_menu() {
     "file" => "includes/geoserver.user.inc",
   ];
 
+  $items["geoserver/call/create-workspace"] = [
+    "title" => "Create Workspace",
+    "description" => "Create geoserver workspace",
+    "page callback" => "drupal_get_form",
+    "page arguments" => [
+      "geoserver_create_workspace_form",
+    ],
+    "access arguments" => ["use geoserver"],
+    "file" => "includes/geoserver.user.inc",
+  ];
+
   return $items;
 }
