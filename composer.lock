@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "lowem/easy-curl",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lowe-Man/easy-curl.git",
-                "reference": "83185aab601fafc125ad3b9a7724112a70cc826a"
+                "reference": "04bc4979420543ba958c38e6090183685557b2e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lowe-Man/easy-curl/zipball/83185aab601fafc125ad3b9a7724112a70cc826a",
-                "reference": "83185aab601fafc125ad3b9a7724112a70cc826a",
+                "url": "https://api.github.com/repos/Lowe-Man/easy-curl/zipball/04bc4979420543ba958c38e6090183685557b2e6",
+                "reference": "04bc4979420543ba958c38e6090183685557b2e6",
                 "shasum": ""
             },
             "require": {
@@ -30,12 +30,12 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Lowem\\EasyCurl\\": ""
+                    "Lowem\\EasyCurl\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "authors": [
                 {
@@ -44,24 +44,31 @@
                 }
             ],
             "description": "Allow you to make requests to API end points easily",
+            "keywords": [
+                "curl",
+                "fsockopen",
+                "http",
+                "ipv6",
+                "sockets"
+            ],
             "support": {
                 "issues": "https://github.com/Lowe-Man/easy-curl/issues",
-                "source": "https://github.com/Lowe-Man/easy-curl/tree/v3.1.0"
+                "source": "https://github.com/Lowe-Man/easy-curl/tree/v3.1.1"
             },
-            "time": "2021-08-08T04:32:19+00:00"
+            "time": "2021-08-19T23:03:53+00:00"
         },
         {
             "name": "lowem/geoserver-php",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lowe-Man/geoserver-php.git",
-                "reference": "485a5f9a5bac5f28ad270b0722775ac2fcc8ba62"
+                "reference": "af6e9225d2b504e312301d838096d6772ea154a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lowe-Man/geoserver-php/zipball/485a5f9a5bac5f28ad270b0722775ac2fcc8ba62",
-                "reference": "485a5f9a5bac5f28ad270b0722775ac2fcc8ba62",
+                "url": "https://api.github.com/repos/Lowe-Man/geoserver-php/zipball/af6e9225d2b504e312301d838096d6772ea154a6",
+                "reference": "af6e9225d2b504e312301d838096d6772ea154a6",
                 "shasum": ""
             },
             "require": {
@@ -90,9 +97,9 @@
             "description": "Wrapper for Geoserver API",
             "support": {
                 "issues": "https://github.com/Lowe-Man/geoserver-php/issues",
-                "source": "https://github.com/Lowe-Man/geoserver-php/tree/v1.0.1"
+                "source": "https://github.com/Lowe-Man/geoserver-php/tree/v1.0.2"
             },
-            "time": "2021-08-18T22:20:18+00:00"
+            "time": "2021-08-20T23:26:52+00:00"
         }
     ],
     "packages-dev": [],
